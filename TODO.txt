@@ -1,0 +1,8 @@
+Basic Todo list: 
+	- set up movement and camera tracking
+	- begin to experiment with collisions
+	- once collisions are good begin working on some more of the "game" mechanics like adding a finish line/lap system
+	- make a basic track fro the playter to follow
+	- add a timer 
+	- create a score board where player can enter their name (stretch goal)
+	- add art assets (stretch goal)
