@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b255ot8fao0b6"]
+
+[ext_resource type="Script" path="res://scenes/racer.gd" id="1_kvctx"]
+[ext_resource type="Texture2D" uid="uid://bjj3geow26uaf" path="res://icon.svg" id="2_jjtdv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_67jsh"]
+size = Vector3(2, 1.5, 0.1)
+
+[node name="racer" type="CharacterBody3D"]
+script = ExtResource("1_kvctx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00567293, 0.0168467, -0.00620055)
+shape = SubResource("BoxShape3D_67jsh")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.55444, 0, 0, 0, 1.19427, 0, 0, 0, 1, 0, 0, 0)
+texture = ExtResource("2_jjtdv")

@@ -6,3 +6,4 @@ Basic Todo list:
 	- add a timer 
 	- create a score board where player can enter their name (stretch goal)
 	- add art assets (stretch goal)
+	- remember to make it playable for arcade machine (stretch goal)

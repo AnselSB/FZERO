@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://caivlfw6vfx1a"]
+
+[ext_resource type="PackedScene" uid="uid://b255ot8fao0b6" path="res://scenes/racer.tscn" id="1_nyk7j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t0o6r"]
+size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ju2f8"]
+size = Vector3(60, 2, 60)
+
+[node name="MainScene" type="Node3D"]
+
+[node name="floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0078125, 0, 0)
+shape = SubResource("BoxShape3D_t0o6r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+mesh = SubResource("BoxMesh_ju2f8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 22, 0)
+shadow_enabled = true
+
+[node name="cameraPivot" type="Marker3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="cameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 8, 38)
+current = true
+fov = 45.0
+
+[node name="racer" parent="." instance=ExtResource("1_nyk7j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 29)
