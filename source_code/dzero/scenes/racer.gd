@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
-
-const SPEED = 500.0
-const JUMP_VELOCITY = 4.5
+@export var rotSpeed : float = PI * 4 
+var theta
+ 
+const SPEED = 1000.0
 const ACCELERATION = 0.5
-const THETA =  1
 const UP = Vector3(0, 1, 0)
 # going to store a vector that will represent the direction of the racer, this direction will change from the directional inputs
 # by default goes in direction into the screen (away from the face of the user) 
@@ -12,15 +12,18 @@ var direc = Vector3(0, 0, -1)
 var initialPos = Vector3(position)
 var rightTurn = Vector3(1, 0, 0)
 var leftTurn = Vector3(-1, 0, 0)
-# will handle all of the movement based controls for the racer, here we need to first get it to move forward, and for now we won't add gravity
-func _physics_process(delta):
-	# Add the gravity, may need not sure at this point	
-	#if not is_on_floor():
-	#	velocity += get_gravity() * delta
+var friction = 0.3
+var accel = 0.08
 
+func _ready(): 
+	set_rotation(Vector3(0, -1*PI, 0))
+
+# will handle all of the movement based controls for the racer
+func _physics_process(delta):
 	if Input.is_action_pressed("gas"):
-			# check for direction changes 
+		# check for direction changes 
 		if Input.is_action_pressed("left"):
+			
 		#	get the left turn (recall right hand rule)
 			leftTurn = UP.cross(direc)
 			# add left turn weight to the direction than normalize
@@ -32,10 +35,17 @@ func _physics_process(delta):
 			# add to the direction the right turn direction and normalize
 			direc = direc + Vector3(rightTurn.x * 0.01, rightTurn.y * 0.01, rightTurn.z * 0.01)
 			direc.normalized()
+		# this will be for calculating the angle at which the model should rotate so that the spirte is facing the direction it's moving
+		# set the theta first 
+		theta = wrapf(atan2(direc.x, direc.z) - rotation.y, -PI, PI)
+		set_rotation(Vector3(0, rotation.y + clamp(rotSpeed * delta, 0, abs(theta)) * sign(theta), 0))
+		
 		# set velocity
-		velocity.z = SPEED * delta * direc.z
-		velocity.y = SPEED * delta * direc.y
-		velocity.x = SPEED * delta * direc.x
+		velocity.z = move_toward(velocity.z, SPEED * delta * direc.z, accel)
+		velocity.y = move_toward(velocity.y, SPEED * delta * direc.y, accel)
+		velocity.x = move_toward(velocity.x, SPEED * delta * direc.x, accel)
 	else: 
-		velocity = Vector3(0, 0, 0)
+		velocity.x = move_toward(velocity.x, 0, friction)
+		velocity.y = move_toward(velocity.y, 0, friction)
+		velocity.z = move_toward(velocity.z, 0, friction)
 	move_and_slide()
