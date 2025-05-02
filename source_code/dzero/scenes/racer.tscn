@@ -16,3 +16,13 @@ shape = SubResource("BoxShape3D_67jsh")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1.55444, 0, 0, 0, 1.19427, 0, 0, 0, 1, 0, 0, 0)
 texture = ExtResource("2_jjtdv")
+
+[node name="CameraController" type="Node3D" parent="."]
+top_level = true
+
+[node name="CameraTarget" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 0.996606, -0.0823212, 0, 0.0823212, 0.996606, 0, 2.16437, 5.52756)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/CameraTarget"]
+transform = Transform3D(1, 0, 0, 0, 0.99939, 0.0349169, 0, -0.0349169, 0.99939, 0, 0.565519, 0.218671)
+current = true
